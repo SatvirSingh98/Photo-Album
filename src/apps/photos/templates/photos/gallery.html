@@ -9,10 +9,14 @@
                     Categories
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">All</li>
+                    <li class="list-group-item">
+                        <a href="{% url 'photos:gallery' %}">All</a>
+                    </li>
 
                     {% for category in categories %}
-                        <li class="list-group-item">{{ category.name }}</li>
+                    <li class="list-group-item">
+                        <a href="{% url 'photos:gallery' %}?category={{ category.name|lower }}">{{ category.name }}</a>
+                    </li>
                     {% endfor %}
 
                     <li class="list-group-item">
@@ -25,18 +29,18 @@
             <div class="row">
 
                 {% for photo in photos %}
-                    <div class="col-md-4">
-                        <div class="card mb-3">
-                            <a href="{{ photo.get_absolute_url }}"><img src="{{ photo.image.url }}" class="card-img-top"
-                                    alt="..."></a>
-                        </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <a href="{{ photo.get_absolute_url }}"><img src="{{ photo.image.url }}" class="card-img-top"
+                                alt="..."></a>
                     </div>
+                </div>
                 {% empty %}
-                    <h3>No Photos...</h3>
+                <h3>No Photos...</h3>
                 {% endfor %}
 
             </div>
         </div>
     </div>
-</div> 
+</div>
 {% endblock content %}
