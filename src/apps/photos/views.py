@@ -1,12 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+
+from .models import Category, Photo
 
 
 def gallery(request):
-    return render(request, 'photos/gallery.html')
+    categories = Category.objects.all()
+    photos = Photo.objects.all()
+    context = {'categories': categories, 'photos': photos}
+    return render(request, 'photos/gallery.html', context)
 
 
 def view_photo(request, pk=None):
-    return render(request, 'photos/view_photo.html')
+    photo = get_object_or_404(Photo, pk=pk)
+    return render(request, 'photos/view_photo.html', {'photo': photo})
 
 
 def upload_photo(request):
